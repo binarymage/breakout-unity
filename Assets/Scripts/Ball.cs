@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 
-public class Ball : MonoBehaviour {
-
+public class Ball : MonoBehaviour
+{
     public Paddle paddle;
 
     private Vector3 positionOffset;
     private bool started;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         positionOffset = transform.position - paddle.transform.position;
         started = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (!started)
         {
             transform.position = paddle.transform.position + positionOffset;
@@ -25,5 +27,5 @@ public class Ball : MonoBehaviour {
                 started = true;
             }
         }
-	}
+    }
 }

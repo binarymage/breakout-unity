@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public void LoadLevel(string name)
     {
@@ -11,5 +12,6 @@ public class LevelManager : MonoBehaviour {
     public void QuitGame()
     {
         Debug.Log("QuitGame requested");
+        Application.Quit();
     }
 }
