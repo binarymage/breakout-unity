@@ -3,8 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    private int level;
-
     public void LoadLevel(string name)
     {
         SceneManager.LoadScene(name);
@@ -12,8 +10,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        level++;
-        SceneManager.LoadScene(level);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void QuitGame()
