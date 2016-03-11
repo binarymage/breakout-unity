@@ -2,7 +2,6 @@
 
 public class Brick : MonoBehaviour
 {
-    public int maxHits;
     public Sprite[] hitSprites;
 
     private int timesHit;
