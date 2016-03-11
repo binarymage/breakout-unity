@@ -28,4 +28,18 @@ public class Ball : MonoBehaviour
             }
         }
     }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        Rigidbody2D ballBody = GetComponent<Rigidbody2D>();
+
+        if (Mathf.Abs(ballBody.velocity.y) < 0.3f)
+        {
+            // If the velocity is truly horizontal, then add a small downward
+            // force to get the ball rolling again
+            bool negative = ballBody.velocity.y <= 0;
+
+            ballBody.AddForce(new Vector2(0, negative ? -0.5f : 0.5f));
+        }
+    }
 }
