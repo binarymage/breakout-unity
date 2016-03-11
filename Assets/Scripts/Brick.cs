@@ -32,7 +32,7 @@ public class Brick : MonoBehaviour
             Destroy(gameObject);
         } else
         {
-            GetComponent<SpriteRenderer>().sprite = hitSprites[timesHit-1];
+            GetComponent<SpriteRenderer>().sprite = hitSprites[timesHit - 1];
         }
     }
 
