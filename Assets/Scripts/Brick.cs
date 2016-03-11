@@ -3,6 +3,7 @@
 public class Brick : MonoBehaviour
 {
     public int maxHits;
+    public Sprite[] hitSprites;
 
     private int timesHit;
     private LevelManager levelManager;
@@ -22,9 +23,16 @@ public class Brick : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         timesHit++;
-        if (timesHit >= maxHits)
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (timesHit >= hitSprites.Length + 1)
         {
             Destroy(gameObject);
+        } else
+        {
+            GetComponent<SpriteRenderer>().sprite = hitSprites[timesHit-1];
         }
     }
 
