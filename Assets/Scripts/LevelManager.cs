@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+	public void BrickDestroyed() {
+		if (Brick.breakableCount <= 0) {
+			LoadNextLevel();
+		}
+	}
+
     public void LoadLevel(string name)
     {
         SceneManager.LoadScene(name);
