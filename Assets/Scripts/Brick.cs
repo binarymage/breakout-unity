@@ -7,12 +7,21 @@ public class Brick : MonoBehaviour
 
     private int timesHit;
     private LevelManager levelManager;
+    private bool isBreakable {
+        get {
+            return this.tag == "Breakable";
+        }
+    }
+
 
     // Use this for initialization
     void Start()
     {
         timesHit = 0;
         levelManager = FindObjectOfType<LevelManager>();
+        if (isBreakable) {
+            breakableCount++;
+        }
     }
 
     // Update is called once per frame
@@ -22,8 +31,10 @@ public class Brick : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        timesHit++;
-        AudioSource.PlayClipAtPoint(sfx, transform.position);
+        if (isBreakable) {
+            timesHit++;
+            AudioSource.PlayClipAtPoint(sfx, transform.position);
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -35,10 +46,5 @@ public class Brick : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = hitSprites[timesHit - 1];
         }
-    }
-
-    private void SimulateWin()
-    {
-        levelManager.LoadNextLevel();
     }
 }
