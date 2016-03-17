@@ -3,6 +3,7 @@
 public class Brick : MonoBehaviour
 {
     public Sprite[] hitSprites;
+    public AudioClip sfx;
 
     private int timesHit;
     private LevelManager levelManager;
@@ -22,6 +23,7 @@ public class Brick : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         timesHit++;
+        AudioSource.PlayClipAtPoint(sfx, transform.position);
     }
 
     void OnCollisionExit2D(Collision2D collision)

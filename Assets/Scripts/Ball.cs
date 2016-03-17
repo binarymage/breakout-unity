@@ -47,7 +47,9 @@ public class Ball : MonoBehaviour
     {
         if (started)
         {
-            GetComponent<AudioSource>().Play();
+            if (!collision.gameObject.CompareTag("breakable")) {
+                GetComponent<AudioSource>().Play();
+            }
         }
     }
 }
