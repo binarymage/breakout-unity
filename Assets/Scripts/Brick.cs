@@ -2,6 +2,8 @@
 
 public class Brick : MonoBehaviour
 {
+    public static int breakableCount;
+
     public Sprite[] hitSprites;
     public AudioClip sfx;
 
