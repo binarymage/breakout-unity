@@ -26,11 +26,6 @@ public class Brick : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (isBreakable) {
@@ -43,8 +38,10 @@ public class Brick : MonoBehaviour
     {
         if (timesHit >= hitSprites.Length + 1)
         {
+            levelManager.BrickDestroyed();
             Destroy(gameObject);
-        } else
+        }
+        else
         {
             GetComponent<SpriteRenderer>().sprite = hitSprites[timesHit - 1];
         }
