@@ -32,22 +32,42 @@ public class Ball : MonoBehaviour
     void OnCollisionExit2D(Collision2D collision)
     {
         Rigidbody2D ballBody = GetComponent<Rigidbody2D>();
-        
-        if (Mathf.Abs(ballBody.velocity.y) < 0.3f)
-        {
-            // If the velocity is truly horizontal, then add a small downward
-            // force to get the ball rolling again
-            bool negative = ballBody.velocity.y <= 0;
+        Vector2 ballVelocity = ballBody.velocity;
 
-            ballBody.AddForce(new Vector2(0, negative ? -0.5f : 0.5f));
+        bool negX = ballVelocity.x <= 0;
+        bool negY = ballVelocity.y <= 0;
+
+        Vector2 force = new Vector2(Random.Range(-0.1f, 0.1f), negY ? -0.05f : 0.0f);
+
+        // Ensure that we don't have a "boring loop"
+        if (Mathf.Abs(ballVelocity.x) < 2)
+        {
+            force.x += negX ? -2 : 2;
         }
+        if (Mathf.Abs(ballVelocity.y) < 5)
+        {
+            force.y = negY ? -10 : 10;
+        }
+
+        ballVelocity += force;
+        if (Mathf.Abs(ballVelocity.x) > 8)
+        {
+            ballVelocity.x = 8;
+        }
+        if (Mathf.Abs(ballVelocity.y) > 20)
+        {
+            ballVelocity.y = 20;
+        }
+
+        ballBody.velocity = ballVelocity;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (started)
         {
-            if (!collision.gameObject.CompareTag("breakable")) {
+            GameObject collider = collision.gameObject;
+            if (!collider.CompareTag("Breakable") && !collider.CompareTag("Lose")) {
                 GetComponent<AudioSource>().Play();
             }
         }
